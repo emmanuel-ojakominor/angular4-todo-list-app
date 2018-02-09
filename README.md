@@ -1,10 +1,10 @@
 # TodoListApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.7.
+This is a simple Angular 4 app that exemplifies the four basic http crud operations/methods (Http.post, Http.get, Http.put, Http.delete).
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `npm start` for a dev server. Navigate to `http://localhost:3000/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
