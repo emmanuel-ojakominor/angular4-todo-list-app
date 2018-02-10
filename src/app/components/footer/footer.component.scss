@@ -1,0 +1,9 @@
+@import '~sass/variables';
+
+.footer {
+    width: 100%;
+    background-color: darken($mainColor, 30);
+    color: #eaeaea;
+    padding: 10px;
+}
+
