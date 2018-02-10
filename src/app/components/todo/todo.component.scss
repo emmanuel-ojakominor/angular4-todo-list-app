@@ -1,0 +1,71 @@
+@import '~sass/variables';
+
+.todos-component {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    height: 100%;
+
+    .form-section {
+        width: 25%;
+        border: 1px solid $mainColor;
+        margin-bottom: 30px;
+        padding: 20px;
+        border-radius: 5px;
+
+        .section-title {            
+            padding-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .form-group {
+            label {
+                color: darken($mainColor , 5);
+                font-weight: bold;
+            }
+        }
+
+        .task-description {
+            textarea {
+                min-height: 12.5em;
+            }
+        }
+
+        .error-msg {
+            color: $errorMsgColor;
+        }
+    }
+
+    .grid-section {
+        width: 75%;
+        margin-right: 20px; 
+        border: 1px solid $mainColor;
+        margin-bottom: 30px;
+        padding: 20px;
+        border-radius: 5px;
+        
+        .section-title {
+            padding-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .grid {
+            thead {
+                color: darken($mainColor , 5);
+            }
+            th {
+                border-top: none;
+                border-color: $mainColor;
+            }
+            td {
+                border-color: $mainColor;
+            }
+        }
+    }
+
+    .btn {
+        cursor: pointer;
+    }
+
+    
+}
