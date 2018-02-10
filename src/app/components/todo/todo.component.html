@@ -1,42 +1,65 @@
 <div class="todos-component container-fluid">
-
-  <section class="grid-section">
-    <h3 class="section-title">Todo List</h3>
-    <table class="table grid">
-      <thead>
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Task Name</th>
-            <th scope="col">Task Description</th>
-            <th scope="col">Edit</th>
-            <th scope="col">Delete</th>
-          </tr>
-      </thead>
-      <tbody>
-        <tr>
-            <td>xx</td>
-            <td>xx</td>
-            <td>xx</td>
-            <td><button class="btn btn-success btn-sm">Edit</button></td>
-            <td><button class="btn btn-danger btn-sm">Delete</button></td>
-          </tr>         
-      </tbody>
-    </table>
-  </section> <!-- /grid-section -->
-
-  <section class="form-section">
-    <form class="create-form">
-      <h3 class="section-title">Create New Task</h3>
-      <div class="task-name form-group">
-        <label>Task Name</label>
-        <input class="form-control" placeholder="Enter task name"> 
-      </div>
-      <div class="task-description form-group">
-        <label>Description</label>
-        <textarea class="form-control" placeholder="Enter description" rows="3" ></textarea> 
-      </div>
-      <input type="submit" class="btn btn-primary btn" value="Create"> 
-    </form>
-  </section> <!-- /form-section -->
-
-</div>
+    
+      <section class="grid-section">
+        <h3 class="section-title">Todo List</h3>
+        <table class="table grid">
+          <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Task Name</th>
+                <th scope="col">Task Description</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+              </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let todo of listOfAllTodos">
+                <td>{{todo.id}}</td>
+                <td>{{todo.taskName}}</td>
+                <td>{{todo.taskDescription}}</td>
+                <td><button (click)="editTodo(todo.id)" class="btn btn-success btn-sm">Edit</button></td>
+                <td><button (click)="deleteTodo(todo.id)" class="btn btn-danger btn-sm">Delete</button></td>
+              </tr>         
+          </tbody>
+        </table>
+      </section>
+    
+      <section class="form-section">
+        <form class="create-form" [formGroup]="todoCreateForm" (ngSubmit)="onSubmitTodoCreateForm()">
+          <h3 *ngIf="todoTaskToBeUpdated; else create" class="section-title"> 
+            Update Task: {{ todoCreateForm.formControlName }}
+          </h3>
+          <ng-template #create>
+              <h3 class="section-title">Create New Task</h3>
+          </ng-template>
+      
+          <div class="task-name form-group">
+            <label>Task Name</label>
+            <input class="form-control" formControlName="taskName" placeholder="Enter task name">
+            <div *ngIf="validateField && todoCreateForm.get('taskName').invalid" class="error-msg">Required field
+            </div>
+          </div>
+          <div class="task-description form-group">
+            <label>Description</label>
+            <textarea class="form-control" formControlName="taskDescription" placeholder="Enter description" rows="3" ></textarea>
+            <div  *ngIf="validateField && todoCreateForm.get('taskDescription').invalid" 
+                    class="error-msg">Required field</div>  
+          </div>
+          <input *ngIf="!todoTaskToBeUpdated" type="submit" class="btn btn-primary btn" value="Create">
+          <input *ngIf="todoTaskToBeUpdated" type="submit" class="btn btn-primary" value="Update">
+          <button (click)="returnToCreateNewTask()" *ngIf="todoTaskToBeUpdated" class="btn btn-primary">Cancel</button>  
+        </form>
+      
+        <div *ngIf="statusCode; else processing">
+          <div *ngIf="statusCode === 201" class="success-msg"> Task added successfully. </div>   
+          <div *ngIf="statusCode === 409" class="success-msg"> Task already exists. </div>   	
+          <div *ngIf="statusCode === 200"  class="success-msg"> Task updated successfully. </div>   	      
+          <div *ngIf="statusCode === 204"  class="success-msg"> Task deleted successfully. </div>   	   
+          <div *ngIf="statusCode === 500"  class="success-msg"> Internal Server Error. </div>	
+        </div>
+        <ng-template #processing>
+          <i  *ngIf="processingRequest" class="fa fa-spinner"></i>
+        </ng-template>
+      </section>
+    
+    </div>
