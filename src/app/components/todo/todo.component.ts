@@ -15,15 +15,14 @@ export class TodoComponent implements OnInit {
   statusCode: number;
   processingRequest: boolean = false;
   todoTaskToBeUpdated = null;
-  validateField: boolean = false;
 
   // Inject TodoService
   constructor(private todoService: TodoService) { }
 
   // Create Form
   todoCreateForm = new FormGroup({
-    taskName: new FormControl('', Validators.required),
-    taskDescription: new FormControl('', Validators.required)	
+    taskName: new FormControl('', [Validators.required, Validators.maxLength(20)] ),
+    taskDescription: new FormControl('', [Validators.required, Validators.maxLength(200)])	
   });
 
   ngOnInit() {
@@ -39,12 +38,7 @@ export class TodoComponent implements OnInit {
   }
 
    // On Submit Todo Create Form 
-   onSubmitTodoCreateForm() {
-	  this.validateField = true;   
-	  if (this.todoCreateForm.invalid) {
-	       return; // form invalid so exit
-    }   
-    
+   onSubmitTodoCreateForm() {    
 	  //Form is valid, now perform create or update
     this.preProcessConfigurations();
 	  let todo = this.todoCreateForm.value;
@@ -87,13 +81,12 @@ export class TodoComponent implements OnInit {
       this.preProcessConfigurations();
       this.todoService.getTodoById(todoId)
 	   .subscribe(todo => {
-	            this.todoTaskToBeUpdated = todo.id;   
-	            this.todoCreateForm.setValue({ 
-                taskName: todo.taskName, 
-                taskDescription: todo.taskDescription });
-	   	  this.validateField = true;
-		    this.processingRequest = false;   
-	   },
+        this.todoTaskToBeUpdated = todo.id;   
+        this.todoCreateForm.setValue({ 
+          taskName: todo.taskName, 
+          taskDescription: todo.taskDescription });
+		      this.processingRequest = false;   
+	       },
         errorCode =>  this.statusCode = errorCode);   
    }
 
@@ -121,7 +114,6 @@ export class TodoComponent implements OnInit {
    returnToCreateNewTask() {
       this.todoTaskToBeUpdated = null;
       this.todoCreateForm.reset();	  
-      this.validateField = false;
    }
 
 }

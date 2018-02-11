@@ -34,11 +34,11 @@ export class TodoService {
   }
 
   //Fetch todo by id
-  getTodoById(articleId: string): Observable<Todo> {
+  getTodoById(todoId: string): Observable<Todo> {
   let cpHeaders = new Headers({ 'Content-Type': 'application/json' });
   let options = new RequestOptions({ headers: cpHeaders });
-  console.log(this.todoUrl +"/"+ articleId);
-  return this.http.get(this.todoUrl +"/"+ articleId)
+  console.log(this.todoUrl +"/"+ todoId);
+  return this.http.get(this.todoUrl +"/"+ todoId)
       .map(extractData)
       .catch(handleError);
   }	
