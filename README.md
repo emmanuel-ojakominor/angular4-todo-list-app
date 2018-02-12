@@ -8,6 +8,7 @@ This is a simple Angular 4 app that exemplifies the four basic http crud operati
 ### Screenshot Two (Update Screen):
 ![todo_list_ _task_update_page](https://user-images.githubusercontent.com/17477556/36069176-4f1e5c84-0eaa-11e8-889b-48f62b6fd371.png)
 
+### Quick Description:
 - To create a task, enter values on the form to the right, and click on "Create" Button. 
 - To Update, click on the corresponding "Edit" button, and the values autopopulate on the form. After updating, click on "Update" button. 
 - For Delete functionality, click on "Delete" button on the grid, and that entry is deleted from the list. 
