@@ -2,10 +2,10 @@
 
 This is a simple Angular 4 app that exemplifies the four basic http crud operations/methods (Http.post, Http.get, Http.put, Http.delete). Below are screenshots revealing the basic look and feel of the App. 
 
-### Create Screen:
+### Screenshot One (Create Screen):
 ![todo_list_ _task_create_page](https://user-images.githubusercontent.com/17477556/36068903-51222e66-0ea5-11e8-895d-24784d4a4b4f.png)
 
-### Update Screen:
+### Screenshot Two (Update Screen):
 ![todo_list_ _task_update_page](https://user-images.githubusercontent.com/17477556/36069176-4f1e5c84-0eaa-11e8-889b-48f62b6fd371.png)
 
 - To create a task, enter values on the form to the right, and click on "Create" Button. 
